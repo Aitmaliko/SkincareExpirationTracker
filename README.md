@@ -98,7 +98,7 @@ Click "View Products" to display all stored products.
 ### 1 
 -If we assume that typical user tracks 10 products and, on average, 20% of those products expire before use, resulting in 2 expired products per user. The Skincare Tracker helps users monitor product expiration dates more effectively, reducing the number of expired products from 2 to 1, which is 50%.With timely tracking, users can save an estimated $20 per product by using them before expiration, leading to potential savings of up to $24,000 annually for 100 users.
 ### 2
-- The Skincare Tracker helps cut waste by preventing expired products from being thrown away. For medication users, it also supports health and safety by ensuring products are used while still effective.
+-The Skincare Tracker helps cut waste by preventing expired products from being thrown away. For medication users, it also supports health and safety by ensuring products are used while still effective.
 
 ## Future Improvements
 - While the application can be adapted for tracking medication expiration, handling the varied storage requirements for medications poses a challenge. Additional features would be necessary to accommodate these complexities.
@@ -122,8 +122,6 @@ Click "View Products" to display all stored products.
 |
 ├── .gitignore                                   <- used to ignore certain folder and files that won't be commit to git.
 │
-│
-├── LICENSE                                      <- license file.
 │
 ├── README.md                                    <- this readme file.
 ```
