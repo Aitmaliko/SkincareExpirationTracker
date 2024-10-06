@@ -1,24 +1,30 @@
 package com.skincare;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Product {
     private int id;
     private String name;
-    private String expirationDate;
-    private String category;
+    private LocalDate expirationDate;
+    private int dDay;
 
-    public Product(String name, String expirationDate, String category) {
+    // Constructor for adding a new product (without id)
+    public Product(String name, LocalDate expirationDate) {
         this.name = name;
         this.expirationDate = expirationDate;
-        this.category = category;
+        this.dDay = calculateDDay(expirationDate);
     }
 
-    public Product(int id, String name, String expirationDate, String category) {
+    // Constructor for retrieving a product from the database (with id)
+    public Product(int id, String name, LocalDate expirationDate, int dDay) {
         this.id = id;
         this.name = name;
         this.expirationDate = expirationDate;
-        this.category = category;
+        this.dDay = dDay;
     }
 
+    // Getter methods
     public int getId() {
         return id;
     }
@@ -27,11 +33,21 @@ public class Product {
         return name;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public String getCategory() {
-        return category;
+    public int getDDay() {
+        return dDay;
+    }
+
+    // Calculate days left (d-day)
+    private int calculateDDay(LocalDate expirationDate) {
+        return (int) ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Name: " + name + ", D-Day: " + dDay + " days left";
     }
 }
