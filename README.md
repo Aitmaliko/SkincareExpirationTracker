@@ -10,7 +10,10 @@
 ## Overview
 
 Skincare Expiration Tracker is a JavaFX application that helps users manage their skincare products by tracking their expiration dates and categories. Users can add new products, view existing products, and delete products from their inventory. The application uses a SQLite database to store product information.
+## Authors
 
+- [@Aitmaliko](https://github.com/Aitmaliko)
+  
 ## Table of Contents
 - [Talk to your PDF](#talk-to-your-pdf)
   - [Overview](#overview)
