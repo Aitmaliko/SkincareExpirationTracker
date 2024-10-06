@@ -1,9 +1,30 @@
 # Skincare Expiration Tracker
 
+![banner](assets/Banner.png)
+
+![Java version](https://img.shields.io/badge/Python%20version-3.10%2B-lightgrey)
+![GitHub last commit](https://img.shields.io/github/last-commit/Aitmaliko/SkincareExpirationTracker)
+![GitHub repo size](https://img.shields.io/github/repo-size/Aitmaliko/SkincareExpirationTracker)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 ## Overview
 
 Skincare Expiration Tracker is a JavaFX application that helps users manage their skincare products by tracking their expiration dates and categories. Users can add new products, view existing products, and delete products from their inventory. The application uses a SQLite database to store product information.
 
+## Table of Contents
+- [Talk to your PDF](#talk-to-your-pdf)
+  - [Overview](#overview)
+  - [Authors](#authors)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [How RAG Works](#how-rag-works)
+  - [How the app Works](#how-the-app-works)
+      - [Step 1: File Upload](#step-1-file-upload)
+      - [Step 2: Pre-run Service](#step-2-pre-run-service)
+      - [Step 3: Intent Service](#step-3-intent-service)
+      - [Step 4: Information Retrieval Service](#step-4-information-retrieval-service)
+      - [Step 5: Response Service](#step-5-response-service)
 ## Features
 
 - **Add Product**: Easily add new skincare products with their name, expiration date, and category.
