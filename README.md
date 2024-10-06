@@ -15,7 +15,7 @@ Skincare Expiration Tracker is a JavaFX application that helps users manage thei
 - [@Aitmaliko](https://github.com/Aitmaliko)
   
 ## Table of Contents
-- [Talk to your PDF](#talk-to-your-pdf)
+- [Skincare Expiration Tracker](#skincare-expiration-tracker)
   - [Overview](#overview)
   - [Authors](#authors)
   - [Table of Contents](#table-of-contents)
@@ -35,7 +35,7 @@ Skincare Expiration Tracker is a JavaFX application that helps users manage thei
 - **Delete Product**: Remove products from your inventory.
 - **Database Connection**: Utilizes SQLite for storing product data, ensuring persistence across sessions.
 
-## Technologies Used
+## Tech Stack
 
 - Java
 - JavaFX
@@ -65,8 +65,10 @@ The application will automatically create a products table if it doesn't exist.
 
 ## Compile and Run
 ```bash
-javac -d out --module-path path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml src/main/java/com/skincare/*.java
-java --module-path path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml -cp "out:path/to/sqlite-jdbc-<version>.jar" com.skincare.SkincareApplication
+javac -d out --module-path /Users/user/Downloads/javafx-sdk-23/lib --add-modules javafx.controls,javafx.fxml src/main/java/com/skincare/*.java
+
+java --module-path /Users/user/Downloads/javafx-sdk-23/lib --add-modules javafx.controls,javafx.fxml -cp "out:/Users/user/Downloads/sqlite-jdbc-3.46.1.3.jar" com.skincare.SkincareApplication
+
 ```
 ## Usage
 Upon launching the application, you will see the main interface with options to add, view, or delete skincare products.
