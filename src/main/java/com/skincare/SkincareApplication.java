@@ -8,11 +8,13 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class SkincareApplication extends Application {
 
     private ProductDAO productDAO;
+    private ListView<Product> productListView;
 
     @Override
     public void start(Stage primaryStage) {
@@ -32,34 +34,32 @@ public class SkincareApplication extends Application {
         TextField nameField = new TextField();
         Label dateLabel = new Label("Expiration Date (YYYY-MM-DD):");
         TextField dateField = new TextField();
-        Label categoryLabel = new Label("Product Category:");
-        TextField categoryField = new TextField();
         Button addButton = new Button("Add Product");
         Button viewButton = new Button("View Products");
         Button deleteButton = new Button("Delete Product");
+
+        productListView = new ListView<>();
+        productListView.setPrefHeight(150);
 
         grid.add(nameLabel, 0, 0);
         grid.add(nameField, 1, 0);
         grid.add(dateLabel, 0, 1);
         grid.add(dateField, 1, 1);
-        grid.add(categoryLabel, 0, 2);
-        grid.add(categoryField, 1, 2);
-        grid.add(addButton, 0, 3);
-        grid.add(viewButton, 1, 3);
-        grid.add(deleteButton, 0, 4);
+        grid.add(addButton, 0, 2);
+        grid.add(viewButton, 1, 2);
+        grid.add(deleteButton, 0, 3);
+        grid.add(productListView, 0, 4, 2, 1);
 
         addButton.setOnAction(e -> {
             String name = nameField.getText();
-            String expirationDate = dateField.getText();
-            String category = categoryField.getText();
+            LocalDate expirationDate = LocalDate.parse(dateField.getText());
 
             try {
-                productDAO.addProduct(new Product(name, expirationDate, category));
+                productDAO.addProduct(new Product(name, expirationDate));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Product added successfully!");
                 alert.showAndWait();
                 nameField.clear();
                 dateField.clear();
-                categoryField.clear();
             } catch (SQLException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error adding product: " + ex.getMessage());
                 alert.showAndWait();
@@ -68,35 +68,26 @@ public class SkincareApplication extends Application {
 
         viewButton.setOnAction(e -> {
             List<Product> products = productDAO.getAllProducts();
-            StringBuilder productList = new StringBuilder("Products in the database:\n");
-
-            for (Product product : products) {
-                productList.append("ID: ").append(product.getId())
-                        .append(", Name: ").append(product.getName())
-                        .append(", Expiration Date: ").append(product.getExpirationDate())
-                        .append(", Category: ").append(product.getCategory()).append("\n");
-            }
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, productList.toString());
-            alert.showAndWait();
+            productListView.getItems().clear(); // Clear the existing items in the list view
+            productListView.getItems().addAll(products); // Add products to the list view
         });
 
         deleteButton.setOnAction(e -> {
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Delete Product");
-            dialog.setHeaderText("Enter the ID of the product to delete:");
-
-            dialog.showAndWait().ifPresent(id -> {
+            Product selectedProduct = productListView.getSelectionModel().getSelectedItem();
+            if (selectedProduct != null) {
                 try {
-                    productDAO.deleteProduct(Integer.parseInt(id));
+                    productDAO.deleteProduct(selectedProduct.getId());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Product deleted successfully!");
+                    alert.showAndWait();
+                    viewButton.fire(); // Refresh the product list
                 } catch (SQLException ex) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Error deleting product: " + ex.getMessage());
                     alert.showAndWait();
-                } catch (NumberFormatException nfe) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Invalid ID format.");
-                    alert.showAndWait();
                 }
-            });
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a product to delete.");
+                alert.showAndWait();
+            }
         });
 
         primaryStage.setTitle("Skincare Tracker");
